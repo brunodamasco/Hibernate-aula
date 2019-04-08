@@ -17,4 +17,7 @@ public interface BaseDAO<T, ID> {
             throws HibernateException;
     void excluir(T entidade, Session session) 
             throws HibernateException;
+
+    T pesquisarPorId(Long id, Session session)
+            throws HibernateException;
 }

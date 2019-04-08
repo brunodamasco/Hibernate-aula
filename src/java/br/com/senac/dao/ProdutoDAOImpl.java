@@ -22,8 +22,14 @@ public class ProdutoDAOImpl extends BaseDAOImpl<Produto, Long>
     public List<Produto> listarPorNome(String nome, Session sessao) 
             throws HibernateException {
         Query consulta = sessao.createQuery("from Produto p where p.nome like :nome");
-        consulta.setParameter(nome, "%" + nome + "%");
+        consulta.setParameter("nome", "%" + nome + "%");
         return consulta.list();
+    }
+
+    @Override
+    public Produto pesquisarPorId(Long id, Session session) throws HibernateException {
+        Produto produto = (Produto) session.get(Produto.class, id);
+        return produto;
     }
     
 }
