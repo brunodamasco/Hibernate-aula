@@ -10,9 +10,9 @@ import br.com.senac.dao.ProdutoDAO;
 import br.com.senac.dao.ProdutoDAOImpl;
 import br.com.senac.entidade.Produto;
 import java.io.IOException;
-import java.io.PrintWriter;
 import static java.lang.Double.parseDouble;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,12 +42,42 @@ public class ProdutoControle extends HttpServlet {
             case "salvar":
                 salvar();
                 break;
+            case "pesquisarPorNome":
+                pesquisarPorNome();
+                break;
+            case "excluir":
+                excluir();
+                break;
+            case "alterar":
+                pesquisarPeloId();
+                break;
         }
         rd.forward(request, response);
     }
     
+    private void pesquisarPeloId(){
+        Long id = Long.parseLong(request.getParameter("id"));
+        session = HibernateUtil.abreConexao();
+        produtoDAO = new ProdutoDAOImpl();
+        try {
+            produto = produtoDAO.pesquisarPorId(id, session);
+            session.close();
+            request.setAttribute("prodAlterar", produto);
+            rd = request.getRequestDispatcher("produto.jsp");
+        } catch (HibernateException e) {
+            System.out.println("Erro ao pesquisar por Id controle" + e.getMessage());
+        }
+    }
     private void salvar(){
         produto = new Produto();
+        
+        String msg = "Salvo com Sucesso!";
+        String id = request.getParameter("id");
+        if(!id.equals("")){
+            produto.setId(Long.parseLong(id));
+            msg = "Alterado com Sucesso!";
+        }
+
         produto.setNome(request.getParameter("nome"));
         produto.setQuantidade(Integer.parseInt(request.getParameter("qtde")));
         produto.setPrecoCompra(parseDouble(request.getParameter("compra")));
@@ -60,13 +90,43 @@ public class ProdutoControle extends HttpServlet {
             session = HibernateUtil.abreConexao();
             produtoDAO.salvarOuAlterar(produto, session);
             rd = request.getRequestDispatcher("produto.jsp");
+            request.setAttribute("msg", msg);
         } catch (HibernateException e) {
             System.out.println("Erro ao salvar "+ e.getMessage());
         }
     }
     
-    private void editar(){
-        
+    private void excluir(){
+        Long id = Long.parseLong(request.getParameter("id"));
+        session = HibernateUtil.abreConexao();
+        produtoDAO = new ProdutoDAOImpl();
+        produto = new Produto();
+        produto.setId(id);
+        produto.setNome(" ");
+        try {
+            produtoDAO.excluir(produto, session);
+            request.setAttribute("mens", "Excluído com sucesso!");
+            session.close();
+        } catch (Exception e) {
+            System.out.println("Erro no controle ao excluir " + e.getMessage());
+        }
+    }
+    
+    private void pesquisarPorNome() {
+        String nome = request.getParameter("nome");
+        produtoDAO = new ProdutoDAOImpl();
+        try {
+            session = HibernateUtil.abreConexao();
+            List<Produto> produtos = produtoDAO.listarPorNome(nome, session);
+            session.close();
+            if(produtos.isEmpty()){
+                request.setAttribute("mens", "Não existe produtos com esse valor.");
+            }
+            request.setAttribute("prods", produtos);
+            rd = request.getRequestDispatcher("pesquisarProduto.jsp");
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar por nome " + e.getMessage());
+        }
     }
     
     @Override

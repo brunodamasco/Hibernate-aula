@@ -5,13 +5,13 @@
     </li>
     <li>
         <a class="js-arrow" href="#">
-            <i class="fas fa-chart-bar"></i>Cadastro</a>
+            <i class="fas fa-chart-bar"></i>Produto</a>
         <ul class="list-unstyled navbar__sub-list js-sub-list">
             <li>
-                <a href="produto.jsp">Produto</a>
+                <a href="produto.jsp">Cadastrar Produto</a>
             </li>
             <li>
-                <a href="index2.html">Cliente</a>
+                <a href="pesquisarProduto.jsp">Pesquisar Produto</a>
             </li>
             <li>
                 <a href="index3.html">Fornecedor</a>
