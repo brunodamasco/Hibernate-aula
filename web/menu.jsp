@@ -14,7 +14,10 @@
                 <a href="pesquisarProduto.jsp">Pesquisar Produto</a>
             </li>
             <li>
-                <a href="index3.html">Fornecedor</a>
+                <a href="cliente.jsp">Cadastrar Cliente</a>
+            </li>
+            <li>
+                <a href="pesquisarCliente.jsp">Pesquisar Cliente</a>
             </li>
         </ul>
     </li>                        

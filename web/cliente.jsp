@@ -2,7 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
-    <!-- HEAD -->
     <head>
         <!-- Required meta tags-->
         <meta charset="UTF-8">
@@ -12,7 +11,7 @@
         <meta name="keywords" content="au theme template">
 
         <!-- Title Page-->
-        <title>Produto</title>
+        <title>Cliente</title>
 
         <!-- Fontfaces CSS-->
         <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -36,7 +35,6 @@
         <link href="css/theme.css" rel="stylesheet" media="all">
 
     </head>
-    <!-- END HEAD -->
 
     <body class="animsition">
         <div class="page-wrapper">
@@ -45,7 +43,7 @@
                 <div class="header-mobile__bar">
                     <div class="container-fluid">
                         <div class="header-mobile-inner">
-                            <a class="logo" href="index.jsp">
+                            <a class="logo" href="index.html">
                                 <img src="images/icon/logo.png" alt="CoolAdmin" />
                             </a>
                             <button class="hamburger hamburger--slider" type="button">
@@ -61,13 +59,19 @@
                         <ul class="navbar-mobile__list list-unstyled">
                             <li class="has-sub">
                                 <a class="js-arrow" href="#">
-                                    <i class="fas fa-tachometer-alt"></i>Produtos</a>
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                                 <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                     <li>
-                                        <a href="produto.jsp">Cadastro de Produtos</a>
+                                        <a href="index.html">Dashboard 1</a>
                                     </li>
                                     <li>
-                                        <a href="index.jsp">Lista de Produtos</a>
+                                        <a href="index2.html">Dashboard 2</a>
+                                    </li>
+                                    <li>
+                                        <a href="index3.html">Dashboard 3</a>
+                                    </li>
+                                    <li>
+                                        <a href="index4.html">Dashboard 4</a>
                                     </li>
                                 </ul>
                             </li>
@@ -224,6 +228,8 @@
                 </header>
                 <!-- HEADER DESKTOP-->
 
+                <!-- HEADER DESKTOP-->
+
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
                     <div class="section__content section__content--p30">
@@ -233,6 +239,7 @@
                                 <div class="col-lg-12">
                                     <!-- Início da mensagem finalizar -->
                                     <c:if test="${msg != null}">
+                                        <!-- Mensagem -->
                                         <div class="sufee-alert alert with-close alert-primary 	alert-dismissible fade show">
                                             <span class="badge badge-pill badge-primary">Success</span>
                                             ${msg}
@@ -243,32 +250,31 @@
                                     </c:if>
                                     <!-- Fim da mensagem finalizar -->
                                     <div class="card">
-                                        <div class="card-header">Produto</div>
+                                        <div class="card-header">Cliente</div>
                                         <div class="card-body">
 
                                             <hr style="height: 10px;">
-                                            <form action="_cadastroControle?cmd=salvar" method="post" novalidate="novalidate">
-                                                <input value="${prodAlterar.id}" type="hidden" name="id"/>
+                                            <form action="_clienteControle?cmd=salvar" method="post" novalidate="novalidate">
+                                                <input value="${cliAlterar.id}" type="hidden" name="id"/>
                                                 <div class="form-group">
-                                                    <label for="nome" class="control-label mb-1">Nome do produto</label>
-                                                    <input id="nome" name="nome" value="${prodAlterar.nome}" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="nome" class="control-label mb-1">Nome do Cliente</label>
+                                                    <input id="nome" name="nome" value="${cliAlterar.nome}" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="qtde" class="control-label mb-1">Quantidade</label>
-                                                    <input id="qtde" name="qtde" value="${prodAlterar.quantidade}" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="cpf" class="control-label mb-1">CPF</label>
+                                                    <input id="cpf" name="cpf" value="${cliAlterar.cpf}" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="compra" class="control-label mb-1">Preço de compra</label>
-                                                    <input id="compra" name="compra" value="${prodAlterar.precoCompra}" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="email" class="control-label mb-1">E-mail</label>
+                                                    <input id="salario" name="email" value="${cliAlterar.email}" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="venda" class="control-label mb-1">Preço de venda</label>
-                                                    <input id="venda" name="venda" value="${prodAlterar.precoVenda}" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="telefone" class="control-label mb-1">Telefone</label>
+                                                    <input id="telefone" name="telefone" value="${cliAlterar.telefone}" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="descricao" class="control-label mb-1">Descrição</label>
-                                                    <textarea id="descricao" name="descricao" class="form-control" aria-required="true" area-invalid="false">${prodAlterar.nome}
-                                                    </textarea>
+                                                    <label for="profissao" class="control-label mb-1">Profissão do Cliente</label>
+                                                    <input id="profissao" name="profissao" value="${cliAlterar.profissao}" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
                                                 <div>
                                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

@@ -24,7 +24,7 @@ public class ProdutoDAOImplTest {
 
     @Test
     public void testSalvar() {
-        System.out.println("teste salvat");
+        System.out.println("teste salvar");
         produto = new Produto(null, "Produto Teste1" + Gerador.gerarNome(5), 
                 10, 10, 0, new Date(), "bla, bla...");
         session = HibernateUtil.abreConexao();

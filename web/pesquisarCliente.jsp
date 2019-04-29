@@ -243,41 +243,58 @@
                                     </c:if>
                                     <!-- Fim da mensagem finalizar -->
                                     <div class="card">
-                                        <div class="card-header">Produto</div>
+                                        <div class="card-header">Pesquisar Cliente</div>
                                         <div class="card-body">
 
                                             <hr style="height: 10px;">
-                                            <form action="_cadastroControle?cmd=salvar" method="post" novalidate="novalidate">
-                                                <input value="${prodAlterar.id}" type="hidden" name="id"/>
+                                            <form action="_clienteControle?cmd=pesquisarPorNome" method="post" novalidate="novalidate">
                                                 <div class="form-group">
-                                                    <label for="nome" class="control-label mb-1">Nome do produto</label>
-                                                    <input id="nome" name="nome" value="${prodAlterar.nome}" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                    <label for="nome" class="control-label mb-1">Digite o nome do cliente</label>
+                                                    <input id="nome" name="nome" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="qtde" class="control-label mb-1">Quantidade</label>
-                                                    <input id="qtde" name="qtde" value="${prodAlterar.quantidade}" type="text" class="form-control" aria-required="true" aria-invalid="false">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="compra" class="control-label mb-1">Preço de compra</label>
-                                                    <input id="compra" name="compra" value="${prodAlterar.precoCompra}" type="text" class="form-control" aria-required="true" aria-invalid="false">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="venda" class="control-label mb-1">Preço de venda</label>
-                                                    <input id="venda" name="venda" value="${prodAlterar.precoVenda}" type="text" class="form-control" aria-required="true" aria-invalid="false">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="descricao" class="control-label mb-1">Descrição</label>
-                                                    <textarea id="descricao" name="descricao" class="form-control" aria-required="true" area-invalid="false">${prodAlterar.nome}
-                                                    </textarea>
-                                                </div>
+
                                                 <div>
                                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                        <span id="payment-button-amount">Salvar</span>
+                                                        <span id="payment-button-amount">Pesquisar</span>
                                                         <span id="payment-button-sending" style="display:none;">Sending?</span>
                                                     </button>
                                                 </div>
                                             </form>
                                         </div>
+                                        <!-- Inicio da lista Tabela -->
+                                        <c:if test="${!empty cli}">
+                                            <div class="table-responsive m-b-40">
+                                                <table class="table table-borderless table-data3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Cliente</th>
+                                                            <th>CPF</th>
+                                                            <th>E-mail</th>
+                                                            <th>Telefone</th>
+                                                            <th>Profissão</th>
+                                                            <th>Ação</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="${cli}" var="cliente">
+                                                            <tr>
+                                                                <td>${cliente.nome}</td>
+                                                                <td>${cliente.cpf}</td>
+                                                                <td>${cliente.email}</td>
+                                                                <td>${cliente.telefone}</td>
+                                                                <td>${cliente.profissao}</td>
+                                                                <td>
+                                                                    <a href="_clienteControle?cmd=alterar&id=${cliente.id}">Alterar</a>
+                                                                    /
+                                                                    <a href="_clienteControle?cmd=excluir&id=${cliente.id}">Excluir</a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </c:if>
+                                        <!-- Final da lista Tabela -->
                                     </div>
                                 </div>
                                 <!-- FIM DO FORMULARIO -->
@@ -285,7 +302,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright">
-                                        <p>Copyright Â© 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                        <p>Copyright Bruno Damasco. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                     </div>
                                 </div>
                             </div>
